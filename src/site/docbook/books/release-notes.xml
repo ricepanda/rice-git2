@@ -1,0 +1,1036 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright 2005-2013 The Kuali Foundation
+
+    Licensed under the Educational Community License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+    http://www.opensource.org/licenses/ecl2.php
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<article xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <info>
+        <title>Kuali Rice ${project.version} Release Notes</title>
+        <edition>${project.version}</edition>
+        <pubdate>Released: ${docbook.build.timestamp}</pubdate>
+    </info>
+    <section xml:id="overview" xreflabel="Overview">
+        <title>Overview</title>
+        <para>Welcome to Rice ${project.version}! </para>
+        <section>
+            <title>Release Highlights</title>
+            <para>This version of Rice includes many improvements to the Kuali Rapid Application
+                Development (KRAD) Framework. Below is a summary of the larger new features and you
+                can learn more about them in the <link xlink:show="new" xlink:href="http://site.kuali.org/rice/${project.version}/reference/html/KRAD_Guide.html">KRAD Guide</link> which is also now publicly
+                available with this release. Also review the Jira list at the end of this document to
+                see the smaller items.</para>
+            <para>
+                <itemizedlist>
+                    <title>Highlights of this release include:</title>
+                    <listitem>
+                        <simpara>Performance Improvements</simpara>
+                    </listitem>
+                    <listitem>
+                        <simpara>Transactional Document Support</simpara>
+                    </listitem>
+                    <listitem>
+                        <simpara>Tooltip</simpara>
+                    </listitem>
+                    <listitem>
+                        <simpara>State-Based Validation</simpara>
+                    </listitem>
+                    <listitem>
+                        <simpara>Help Framework</simpara>
+                    </listitem>
+                    <listitem>
+                        <simpara>Question Framework</simpara>
+                    </listitem>
+                    <listitem>
+                        <simpara>Collections Redesign</simpara>
+                    </listitem>
+                    <listitem>
+                        <simpara>Messages From Central Repository</simpara>
+                    </listitem>
+                    <listitem>
+                        <simpara>Rich Messages</simpara>
+                    </listitem>
+                    <listitem>
+                        <simpara>Legend Tag for Fieldsets</simpara>
+                    </listitem>
+                    <listitem>
+                        <simpara>Validation Message Refactoring for Accessibility</simpara>
+                    </listitem>
+                    <listitem>
+                        <simpara>Ajax Improvements</simpara>
+                    </listitem>
+                    <listitem>
+                        <simpara>Tooling: Rice Data Object (RDO), Rice Dictionary Validator
+                            (RDV)</simpara>
+                    </listitem>
+                    <listitem>
+                        <simpara>Numerous bug fixes and minor improvements</simpara>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <section>
+            <title>Download</title>
+            <para>Kuali Rice ${project.version} can be downloaded from the Rice website at <link xlink:show="new" xlink:href="http://kuali.org/rice/download">http://kuali.org/rice/download</link>.</para>
+            <para>There are three different distributions of Rice available: source, binary and
+                server. Please read the <link xlink:href="http://site.kuali.org/rice/${project.version}/reference/html/IG.html">Installation Guide</link> for
+                more details on each of these distributions.</para>
+            <para>Applications can also consume Rice from the maven site at <link
+                    xlink:href="http://search.maven.org/#search|ga|1|org.kuali.rice"
+                    >http://search.maven.org/#search|ga|1|org.kuali.rice</link>.</para>
+        </section>
+        <section>
+            <title>Documentation</title>
+            <para>API Documentation can be found at <link xlink:show="new" xlink:href="http://site.kuali.org/rice/${project.version}/apidocs/index.html">http://site.kuali.org/rice/${project.version}/apidocs/index.html</link></para>
+            <para>Formal documentation can be found at <link xlink:show="new"
+                    xlink:href="http://site.kuali.org/rice/${project.version}/reference/html/index.html"
+                    >http://site.kuali.org/rice/${project.version}/reference/html/index.html</link>.
+                This documentation is still in the process of review and update  which will continue
+                through subsequent releases, so please follow the notes in each document to report
+                any outdated information.</para>
+        </section>
+        <section>
+            <title>Contact</title>
+            <para>If you encounter any difficulty, please don't hesitate to contact the Rice team on
+                our public collaboration mailing list at <email>rice.collab@kuali.org</email>.
+                Please indicate that you are using the ${project.version} version of Rice.</para>
+        </section>
+    </section>
+    <section xml:id="upgrade-guide" xreflabel="Upgrade Guide">
+        <title>Upgrade Guide: Rice 2.1 to Rice 2.2</title>
+        <caution><para>We recommend backing up your database before performing any upgrade!</para></caution>
+        <section>
+            <title>Upgrading the server database</title>
+            <para>MySQL and Oracle scripts for performing these updates are available in the
+                following locations in the Rice distribution downloads:<variablelist>
+                    <varlistentry>
+                        <term>MySQL</term>
+                        <listitem>
+                            <para><code>scripts/upgrades/2.1 to
+                                    2.2/final/update_final_mysql.sql</code></para>
+                        </listitem>
+                    </varlistentry>
+                    <varlistentry>
+                        <term>Oracle</term>
+                        <listitem>
+                            <para><code>scripts/upgrades/2.1 to
+                                    2.2/final/update_final_oracle.sql</code></para>
+                        </listitem>
+                    </varlistentry>
+                </variablelist></para>
+        </section>
+        <section>
+            <title>Bean Conversion Script</title>
+            <para>With the 2.2-m1 release are two scripts that will automatically convert changed
+                bean names, property names, and CSS classes. These scripts are located in the Rice
+                project within folder: scripts/bean-rename These are groovy scripts. To run a groovy
+                script: <orderedlist>
+                    <listitem>
+                        <para>Download groovy at: <link
+                                xlink:href="http://groovy.codehaus.org/Download?nc"
+                                >http://groovy.codehaus.org/Download?nc</link></para>
+                    </listitem>
+                    <listitem>
+                        <para>Follow the install instructions at: <link
+                                xlink:href="http://groovy.codehaus.org/Installing+Groovy"
+                                >http://groovy.codehaus.org/Installing+Groovy</link></para>
+                    </listitem>
+                    <listitem>
+                        <para>Change into the directory which contains the script, then run with
+                            'groovy scriptname.groovy'</para>
+                    </listitem>
+                </orderedlist> The first conversion script is named BeanRename.groovy and renames
+                bean ids and property names. This will find all XML files in the directory from
+                which the script is run, and all sub-directories. Therefore you should first copy
+                BeanRename.groovy and the file beanReplacements.txt to the directory which contains
+                your UIF XML files, then run from that directory.  <emphasis role="bold">Please note
+                    if you have XML files that contain KNS definitions (such as the LookupDefinition
+                    or MaintainbleDefinition), this conversion script should not be run on those
+                    files.</emphasis> The second script is named CssRename.groovy and renames CSS
+                classes. This will find all CSS files in the directory from which the script is run,
+                and all sub-directories. Therefore you should first copy CssRename.groovy and the
+                file cssReplacements.txt to the directory which contains your CSS file, then run
+                from that directory.</para>
+        </section>
+    </section>
+    <section xml:id="items_addressed_in_rice">
+        <title>Items Addressed in Rice ${project.version}</title> 
+<section>
+  <title>Bug Fix</title>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-5171'>KULRICE-5171</link>] - Lookup not returning supporting attributes</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-7202'>KULRICE-7202</link>] - Create new Responsibility Route Name Node has no front or back end validation.</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8488'>KULRICE-8488</link>] - Role Service does not notify that a derived role type service was not found</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8538'>KULRICE-8538</link>] - Responsibility Required routing flag not working unless responsibility defined for exact document</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8604'>KULRICE-8604</link>] - Travel Account Maintenance Document, Parameter Maintenance Document, and Routing Rule Delegation in sampleapp DB Incident Reports on viewing.</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8641'>KULRICE-8641</link>] - Lock error is not shown</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8742'>KULRICE-8742</link>] - When summary title has an expression the title does not render</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8747'>KULRICE-8747</link>] - Table layout manager rowDetailsLinkName property not getting used</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8803'>KULRICE-8803</link>] - Inquiry bases logic on readonly for building inquiry or direct inquiry based on the readonly flag of the Inquiry widget, not the field it applies to</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8805'>KULRICE-8805</link>] - Method arguments for field queries are not getting sent with script call</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8806'>KULRICE-8806</link>] - Editing of value with custom editor does not invoke editor on post</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8807'>KULRICE-8807</link>] - Link component should have a property for displaying in lightbox</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8808'>KULRICE-8808</link>] - Rich messages not getting picked up on image caption or cutline text</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8815'>KULRICE-8815</link>] - Move lookup actions to collection group's action column</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8821'>KULRICE-8821</link>] - Refresh timer throws exception if refresh method to call not set</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8822'>KULRICE-8822</link>] - Setter methods for event script not on ScriptEventSupport</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8976'>KULRICE-8976</link>] - Missing ValidationPattern error message key</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8980'>KULRICE-8980</link>] - 'Add all' option for lookup criteria field does not work with rich options</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8981'>KULRICE-8981</link>] - #fp binding prefix does not working correctly on fields that bind to a map</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8982'>KULRICE-8982</link>] - Lookup result group gets initialized twice causing table details to get added twice</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8998'>KULRICE-8998</link>] - Change Lookups to use Uif-DataFields in resultField List</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9023'>KULRICE-9023</link>] - 2.3 KIMServiceLocatorInternalTest.testGetKimTypeService_KimType expected:DataDictionaryTypeServiceBase but was:class $Proxy141</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9053'>KULRICE-9053</link>] - Cannot perform multiple KRAD document actions with certain browsers</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9055'>KULRICE-9055</link>] - "id was null" exceptions for group and role lookups</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9074'>KULRICE-9074</link>] - Dialog response inputs can stomp on each other</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9097'>KULRICE-9097</link>] - Don't display the common section on KRMS Term and TermSpecification maintenance documents</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9138'>KULRICE-9138</link>] - None of the Lookups and inquiry screens are working on the KRAD merged trunk</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9167'>KULRICE-9167</link>] - Client Validation Fails after a save and subsequent save when no errors</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9218'>KULRICE-9218</link>] - Components for pages not displayed not getting ids causes state issues</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9247'>KULRICE-9247</link>] - Data object metadata service throws exception when it encounters interface/abstract type</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9250'>KULRICE-9250</link>] - Revert links for converted screens to the KNS versions</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9264'>KULRICE-9264</link>] - ant build.xml file not finding rice-web/pom.xml artifact</para>
+        </listitem>
+      </itemizedlist>
+    </para>
+</section>
+<section>
+  <title>Improvement</title>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-6932'>KULRICE-6932</link>] - ModuleServiceBase needs to be moved out of the rice "impl" module</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-7562'>KULRICE-7562</link>] - Improve subset of SpringEL - that we convert for specific functionality to js - by allowing a contains (or similar) operation</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8169'>KULRICE-8169</link>] - KRMS Agenda Editor: Selection removed on proposition description focus during edit</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8640'>KULRICE-8640</link>] - Create new widget to highlight code syntax</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8748'>KULRICE-8748</link>] - Set TableLayoutManager applyDefaultCellWidths to false by default</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8818'>KULRICE-8818</link>] - Provide a way for components to add data generically to the form</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8819'>KULRICE-8819</link>] - Add ByteArrayMultipartFileEditor to registered property editors to allow file types to bind to Byte[] data types</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8897'>KULRICE-8897</link>] - Need setViewHelperService method on View component</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8927'>KULRICE-8927</link>] - Modify DataObjectType so that instances are always created via a static method and are cached as well on the backend</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8941'>KULRICE-8941</link>] - Add flag to StackedLayoutManager to indicate that actions must be added to line group and not linegroup footer</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9060'>KULRICE-9060</link>] - add property "additionalCssClasses" to replace "cssClasses" list-merge</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9073'>KULRICE-9073</link>] - Add horizontal and vertical scrolling to sampleapp code editor</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9087'>KULRICE-9087</link>] - Ensure that our out-of-the-box persistence providers are throwing Spring DataAccessException where appropriate</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9114'>KULRICE-9114</link>] - DocumentBase has unnecessary overrides of refresh and refreshReferenceObject</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9116'>KULRICE-9116</link>] - Deprecate BusinessObject classes</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9208'>KULRICE-9208</link>] - isValidLine flag not available in ViewHelperServiceImpl.processAfterAddLine() method</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9228'>KULRICE-9228</link>] - Allow method to call to not be specified on URL</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9232'>KULRICE-9232</link>] - Add view TopGroup (a group that appears above breadcrumbs)</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9261'>KULRICE-9261</link>] - All request using multi-part encoding and should not</para>
+        </listitem>
+      </itemizedlist>
+    </para>
+</section>
+<section>
+  <title>New Feature</title>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-5804'>KULRICE-5804</link>] - Ability to configure results limits differently for different lookups needs to be added to KRAD - it was contributed for KNS in KULRICE-5686</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8919'>KULRICE-8919</link>] - Create krad-data module</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8921'>KULRICE-8921</link>] - Implement ProviderBasedDataObjectService and ProviderRegistry</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8923'>KULRICE-8923</link>] - Implement OJB version of PersistenceProvider</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8924'>KULRICE-8924</link>] - Implement OJB version of MetadataProvider</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9066'>KULRICE-9066</link>] - Implement JPA version of MetadataProvider</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9168'>KULRICE-9168</link>] - Add js function to show group content in tooltip</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9193'>KULRICE-9193</link>] - Implement cross-platform custom JPA id generation</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9220'>KULRICE-9220</link>] - Implement facility for preventing legacy persistence framework use at runtime</para>
+        </listitem>
+      </itemizedlist>
+    </para>
+</section>
+<section>
+  <title>Task</title>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-5389'>KULRICE-5389</link>] - Lookup - Implement lookup options</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-5390'>KULRICE-5390</link>] - Lookup - Implement search field conversions</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-7991'>KULRICE-7991</link>] - Refactor client side state handling</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8150'>KULRICE-8150</link>] - Upgrade Selenium 1 Smoke Tests to Selenium 2 (WebDriver)</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8690'>KULRICE-8690</link>] - Uif-BaseTheme-parentBean defaults to minimized js which are difficult to debug</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8827'>KULRICE-8827</link>] - Dialog methods in UifControllerBase should not throw exception</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8828'>KULRICE-8828</link>] - Dialog group bean definition should force session presistence</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8868'>KULRICE-8868</link>] - Page Titling Redesign</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8874'>KULRICE-8874</link>] - Breadcrumbs with Sub-navigation</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8875'>KULRICE-8875</link>] - Unique bookmarkable URLs for pages (in the left nav or tabs)</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8877'>KULRICE-8877</link>] - UI boilerplate elements - make always in view (left nav, buttons, breadcrumbs), while others scroll away or collapse</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-8917'>KULRICE-8917</link>] - Iterate on validation framework UI</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9037'>KULRICE-9037</link>] - Code Report</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9038'>KULRICE-9038</link>] - Lookup - execute search when hitting enter while in any of the criteria text fields</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9040'>KULRICE-9040</link>] - Lookup - add triggerOnChange property on LookupCriteriaInputField that will trigger search on change of that field</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9121'>KULRICE-9121</link>] - Code Report</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9124'>KULRICE-9124</link>] - Code Report</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9126'>KULRICE-9126</link>] - README.txt in project root has out of date information for launching from Eclipse</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9127'>KULRICE-9127</link>] - Convert Address Type to KRAD</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9128'>KULRICE-9128</link>] - Convert Affiliation Type to KRAD</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9130'>KULRICE-9130</link>] - Convert Citizenship Status to KRAD</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9131'>KULRICE-9131</link>] - Convert Email Type to KRAD</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9132'>KULRICE-9132</link>] - Convert Entity Type to KRAD</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9133'>KULRICE-9133</link>] - Convert External Identifier Type to KRAD</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9134'>KULRICE-9134</link>] - Convert Name Type to KRAD</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9135'>KULRICE-9135</link>] - Convert Phone Type to KRAD</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9136'>KULRICE-9136</link>] - Convert Role/Group/Permission/Responsibility Type to KRAD</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9175'>KULRICE-9175</link>] - Code Report</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9176'>KULRICE-9176</link>] - Code Report</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9177'>KULRICE-9177</link>] - Code Report</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9184'>KULRICE-9184</link>] - Add 'order by' to CriteriaLookup</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9197'>KULRICE-9197</link>] - KRAD 2.2.0 Maintenance Document: Not indicating changed fields</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9209'>KULRICE-9209</link>] - Convert Employment Status to KRAD</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9211'>KULRICE-9211</link>] - Convert Employment Type to KRAD</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9216'>KULRICE-9216</link>] - Code Report</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9217'>KULRICE-9217</link>] - Code Report</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9224'>KULRICE-9224</link>] - QuickFinder without Lightbox</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9227'>KULRICE-9227</link>] - Correct spelling of suppressed</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9236'>KULRICE-9236</link>] - Code Report</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9237'>KULRICE-9237</link>] - Restructure sections on clustering and session document service</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9239'>KULRICE-9239</link>] - Correct KRAD Guide on using UIF functions</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9240'>KULRICE-9240</link>] - UifBooleanEditor Property Editor formatted string values </para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9245'>KULRICE-9245</link>] - Code Report</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9246'>KULRICE-9246</link>] - Code Report</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9254'>KULRICE-9254</link>] - Add striping to the tables for easier readability</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9267'>KULRICE-9267</link>] - Change build process so generated files are placed under /target</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9269'>KULRICE-9269</link>] - Code Report</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9278'>KULRICE-9278</link>] - Update documentation per 2.3 restructure for KRAD split</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9293'>KULRICE-9293</link>] - JavaScript error on QuickFinder inside Collections</para>
+        </listitem>
+        <listitem>
+          <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9294'>KULRICE-9294</link>] - Active indicator is not set properly on maintenance documents</para>
+        </listitem>
+      </itemizedlist>
+    </para>
+</section>
+
+    </section>
+    <section>
+        <title>Library Upgrades</title>
+        <itemizedlist>
+            <listitem>
+                <para>JQuery updated to version 1.8.23</para>
+            </listitem>
+            <listitem>
+                <para>dataTables upgraded to version 1.9</para>
+            </listitem>
+        </itemizedlist>
+    </section>
+    <section>
+        <title>Impacting Changes</title>
+        <section>
+            <title>KRAD UIF configuration (XML)</title>
+            <para>The following changes impact KRAD UIF configuration (XML). Mostly these should be
+                covered by the Bean/CSS conversion script documented in the Upgrade Guide section of
+                this document.</para>
+            <section>
+                <title>Pass title property through to tag attribute on all components</title>
+                <para>Previously the component title property was be used for various purposes. For
+                    example on Containers the title was used as a shorthand for setting
+                    header.headerText. The title property should be getting passed to the template
+                    and used to populate the title attribute on the corresponding tag (for example
+                    on a group this would be the div). Therefore the change was made to pass this
+                    through and add to the tags. The container property 'headerText' was added as a
+                    shorthand for setting the header.headerText property. The bean conversion script
+                    converts title to headerText. However it must be used with care since this
+                    should only be converted on containers (view and group), and not other
+                    components (like image or link).</para>
+            </section>
+            <section>
+                <title>Cleanup of Component Property Names</title>
+                <para>Many component property names were changed to better reflect their purpose.
+                    The bean conversion script will take care of renaming the properties in XML
+                    configuration. For a full listing of changed property names, see the project
+                    file 'beanReplacements.txt'.</para>
+            </section>
+            <section>
+                <title>Add Upper, Right, and Lower groups to Header</title>
+                <para>To provide more flexibility for adding header content, three groups were added
+                    to the Header component. These groups correspond to their render position
+                    relative to the h tag (header text). The first is named upperGroup and will
+                    render above the header text. The second is named rightGroup and will render to
+                    the right of the header text. The third is named lowerGroup and is rendered
+                    below the header text. One or more of these groups can have content for a single
+                    header.</para>
+                <para>The previous Header group named headerGroup has been replaced by the
+                    lowerGroup. The bean conversion script will convert any configuration on
+                    headerGroup to lowerGroup. If the content was intended to align to the right of
+                    the header text, this will need to be manually changed to rightGroup.</para>
+            </section>
+            <section>
+                <title>Framework Improvements - Introduction of Content Element</title>
+                <para>Previously all HTML content was rendered through a Field component. The field
+                    wrapped the content with a span and could also render a label. For some content
+                    types this did not make sense (for example iframe, label, and header). In
+                    addition, for others it might be useful to have a label, but general not needed
+                    (link, action, image). Therefore a component type named ContentElement was
+                    introduced. A content element corresponds directly with the HTML content tag
+                    without additional wrapping. For the first set of fields described above
+                    (iframe, label, header), a content element was created and the field was
+                    removed. For the second set content elements were created, but the field
+                    component remains. </para>
+                <para>Mostly the impact of this was taken care of by the base bean definitions. In
+                    some cases the actual bean id changed which is handled by the bean conversion
+                    script. In cases where the field support remains but there is now a content
+                    element, application XML should be reviewed for places where it makes sense to
+                    change to the content element.</para>
+            </section>
+            <section>
+                <title>CSS Rework</title>
+                <para>An effort begin towards the end of the 2.0 cycle to rework the KRAD CSS code.
+                    This began with implementing a naming convention and standard for applying style
+                    classes to components. This work was completed in 2.2 M1 with the rework of the
+                    style sheets. This included rewriting styles to correspond with the new classes
+                    and removing any old code. Changed style names within the UIF XML can be
+                    converted using the CssRename.groovy script. Custom style sheets will need to be
+                    updated manually.</para>
+            </section>
+            <section>
+                <title>Framework Improvements - Validation Message Architecture</title>
+                <para>Validation message handling has changed significantly in 2.2 M1. The new
+                    architecture addresses many issues, primary among these being accessibility. The
+                    ErrorsField component has been dropped and replaced with the ValidationMessages
+                    component (with subclasses PageValidationMessages, GroupValidationMessages, and
+                    FieldValidationMessages). Many properties of ErrorsField are no longer
+                    available. These changes include:</para>
+                <itemizedlist>
+                    <listitem>
+                        <para>All original properties other than displayMessages,
+                            displayFieldLabelWithMessages (now section/page level only), and
+                            additionalKeysToMatch have been eliminated as they no longer serve a
+                            purpose in the new framework.  <emphasis role="bold">Remove these
+                                properties from beans if in use</emphasis>.</para>
+                    </listitem>
+                    <listitem>
+                        <para>2 new properties were introduced: <itemizedlist>
+                                <listitem>
+                                    <para>collapseAdditionalFieldLinkMessages (section/page level
+                                        only) - for collapsing fieldLink messages in a summary for
+                                        messages beyond the first for section level summaries.  KRAD
+                                        and UX recommended default is true.</para>
+                                </listitem>
+                                <listitem>
+                                    <para>useTooltip (field level only) - for using tooltip to
+                                        display validation messages.  KRAD and UX recommended
+                                        default is true.</para>
+                                </listitem>
+                            </itemizedlist>
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>The way messages are displayed on the page and user interaction with
+                            these messages were changed heavily.  These changes include: <itemizedlist>
+                                <listitem>
+                                    <para>Validation messages are summarized at the page level with
+                                        links to sections which contain the messages</para>
+                                </listitem>
+                                <listitem>
+                                    <para>Validation message text for fields are links to those
+                                        fields which will cause those fields to be focused</para>
+                                </listitem>
+                                <listitem>
+                                    <para>Validation message text is shown in tooltips for fields
+                                        when focused or hovered over</para>
+                                </listitem>
+                                <listitem>
+                                    <para>When server errors are attempted to be fixed by the user,
+                                        the field is marked as modified (if no client error
+                                        persists)</para>
+                                </listitem>
+                                <listitem>
+                                    <para>When displayMessages flag switched to false, the framework
+                                        will attempt to show the message content in the "next"
+                                        available message area</para>
+                                </listitem>
+                                <listitem>
+                                    <para>When a user tries to submit a page that still has
+                                        client-side errors the new summaries will appear</para>
+                                </listitem>
+                                <listitem>
+                                    <para>When a page has server side messages these new sumaries
+                                        will appear</para>
+                                </listitem>
+                                <listitem>
+                                    <para>Various highlighting and color styling changes associated
+                                        with the framework</para>
+                                </listitem>
+                            </itemizedlist>
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>See the Validation Framework demo view in the sample app to get a full
+                            demonstration of all new features introduced</para>
+                    </listitem>
+                </itemizedlist>
+                <para>Some property names have changed which is handled by the bean conversion
+                    script.</para>
+            </section>
+            <section>
+                <title>UI Framework - Online Help architecture</title>
+                <para>The help URL on the document and lookup level has been removed from the KEW
+                    document type. This means the "Help Definition URL" and the "Document Search
+                    Help URL" on the "Document Type" are depreciated and don't serve any function
+                    anymore. Instead the help URL are defined on the UIF-View level either within
+                    the data dictionary or the system parameters.</para>
+            </section>
+            <section>
+                <title>Combine Inquiry and DirectInquiry</title>
+                <para>In 2.0, the Inquiry and DirectInquiry were separate widgets with separate
+                    properties on InputField. Therefore, when both were required both had to be
+                    configured with similar properties. This caused duplicate configuration. In 2.2,
+                    the DirectInquiry widget has been removed and the Inquiry widget supports
+                    rendering the direct inquiry when the field is not read-only. The direct inquiry
+                    behavior can be disabled with the Inquiry property enableDirectInquiry.</para>
+                <para>Any configuration referencing fieldDirectInquiry will need to be converted to
+                    the property named inquiry. Note if the standard inquiry and direct inquiry were
+                    both configured for a field, the direct inquiry can simply be dropped. If you
+                    were disabling the direct inquiry by fieldDirectInquiry.render="false", this can
+                    be changed to inquiry.enableDirectInquiry. The bean conversion script makes this
+                    change.</para>
+            </section>
+            <section>
+                <title>Growls Processing</title>
+                <para>The process for adding growl messages server side has been modified. In 2.0, a
+                    growl was shown for each message in the GlobalVariables.getMessageMap() that was
+                    of type Info. The MessageMap has been enhanced to support a new growl type. For
+                    adding growls you now should call one of the following methods:</para>
+                <programlisting>public void addGrowlMessage(String growlTitle, String messageKey); 
+public void addGrowlMessage(String growlTitle, String messageKey, String... messageParameters); 
+public void addGrowlMessage(String growlTitle, String growlTheme, String messageKey); 
+public void addGrowlMessage(String growlTitle, String growlTheme, String messageKey, String... messageParameters);</programlisting>
+                <para>No changes were made for adding growls client side (still call the method
+                    showGrowl(message, title, theme))</para>
+            </section>
+            <section>
+                <title>Allow controller to return one way regardless of component refresh or full
+                    build</title>
+                <para>In Rice 2.0, a controller method needed to be built based on whether it would
+                    be called as part of a component refresh, or a full request. This was confusing
+                    as it required knowledge of the different refresh return method and prevented
+                    the method from being used for both types of calls. In 2.2, the controller
+                    methods no longer need to make this distinction. They can simply return the
+                    standard getUifModelAndView call for both component refresh and full
+                    requests.</para>
+                <para>Any controller methods that were returning updateComponent(uiTestForm, result,
+                    request, response) should be replace the return call
+                    with getUIFModelAndView(form).</para>
+            </section>
+            <section>
+                <title>Default action field prototype on Table layout manager to horizontal</title>
+                <para>The default layout for the action field group rendered by a table layout
+                    manager was changed from vertical box to horizontal box. This means for table
+                    with multiple line actions, the actions will now render in a horizontal row
+                    instead of vertical. If it is desired to have the actions align vertically,
+                    the actionFieldPrototype can be overridden.</para>
+            </section>
+            <section>
+                <title>Cleanup of UIF Footer Beans</title>
+                <para>In Rice 2.0 the Uif-FormView bean contained a footer defined that included the
+                    save, close, and cancel actions. The Uif-FormView bean has been changed to not
+                    include any footer actions by default. For these common actions, a bean named
+                    'Uif-FormFooter' was created that can be used for a view or page when
+                    needed.</para>
+            </section>
+        </section>
+        <section>
+            <title>Ajax framework improvements.</title>
+            <para>Renamed clientSideJs in Action.java to actionScript. Any client side javascript
+                that the user needs to be executed will now have to be set using the "actionScript"
+                property instead of "clientSideJs".</para>
+            <para>handleIncidentReport() in krad.message was changed so that it no longer replaces
+                the view with the incident report. It checks if the content is incident report view
+                and then returns true else it returns false. The view is now replaced by the
+                updateViewHandler() in krad.ajax.</para>
+            <para>ajaxSubmitForm(methodToCall, successCallback, additionalData, elementToBlock,
+                errorCallback) has been changed to ajaxSubmitForm(methodToCall, successCallback,
+                additionalData, elementToBlock ,  preSubmitCall). This in turn calls the
+                ajaxSubmitFormFullOpts(methodToCall, successCallback, additionalData,
+                elementToBlock, errorCallback, validate,preSubmitCall, returnType).</para>
+            <para>The following new methods have been added to krad.ajax.js</para>
+            <para>1. actionInvokeHandler(component)  -  Instead of calling the
+                jQuery('#kualiForm').submit(), it has been replaced by the
+                actionInvokeHandler(component). Component is the element on which the action has
+                been invoked. This method checks based on the data-attributes whether it is an ajax
+                submit or a non ajax one and then calls one of the submit       methods.</para>
+            <para>2. ajaxSubmitForm()  - This in turn calls the ajaxSubmitFormFullOpts() with the
+                validate flag set to false.</para>
+            <para>     </para>
+            <para> 3. validateAndAjaxSubmitForm()  - This in turn calls the ajaxSubmitFormFullOpts()
+                with the validate flag set to true.</para>
+            <para>    </para>
+            <para>4. ajaxSubmitFormFullOpts() - Submits the form through an ajax submit, the
+                response is the new page html runs all hidden scripts passed back (this is to get
+                around a bug with premature script evaluation). It is similar to the old
+                ajaxSubmitForm() but has some additional parameter which allow for providing hooks 
+                for  successCallback,errorCallback and preSubmitCalls. It also takes a validate flag
+                as well as a returnType. A returnType is used to request data from the server but
+                the server may override it. If the validate flag is set it validates the form and 
+                proceeds if the form is valid. If a presubmit call is specified then it executes
+                that and proceeds if it returns true. If the returnType is not given then it
+                defaults to "update-page" and sets it on the data which will be submitted to the
+                server. It then calls the invokeAjaxReturnHandler() to determine which handler
+                function to call. The successCallback and errorCallback are handled as they were
+                before in ajaxSubmitForm(). The elementToBlock and the lightBox processing remain
+                the same.</para>
+            <para>5. submitForm() -  This is used for non-ajax calls. This in turn calls the
+                submitFormFullOpts() with the validate flag set to false.</para>
+            <para>     </para>
+            <para> 6. validateAndSubmitForm() - This is used for non-ajax calls. This in turn calls
+                the submitFormFullOpts() with the validate flag set to true.</para>
+            <para>     </para>
+            <para> 7. submitFormFullOpts() - Does a non ajax submit. The data-attributes that are
+                passed in as additional data are written as hidden params to the form before it is
+                submitted.</para>
+            <para>     </para>
+            <para> 8. invokeAjaxReturnHandler() - This method iterates over divs in the content that
+                is passed in to determine which handler functions to call. The handler functions are
+                initialized in krad.initialize.js</para>
+            <para>     </para>
+            <para> 9. updatePageHandler() - Called if the returnType is "update-page". Finds the
+                page content in the returned content and updates the page, then processes
+                breadcrumbs and hidden scripts. While processing, the page contents are hidden
+                (works similar to the the updatePageCallback()).</para>
+            <para>     </para>
+            <para> 10. updateViewHandler() - Replaces the view with the given content and runs the
+                hidden scripts. Called when the returnType is "update-view".</para>
+            <para>     </para>
+            <para> 11. redirectHandler() - Called when the returnType is "redirect". Replaces the
+                contents of the window with those of the redirected URL.</para>
+            <para>12. updateComponentHandler() - Called when the returnType is "update-component".
+                Retrieves the component with the matching id from the server and replaces a
+                matching  _refreshWrapper marker span with the same id with the result.  In
+                addition, if the result contains a label and a displayWith marker span has a
+                matching id, that span will be replaced with the label content  and removed from the
+                component.  This allows for label and component content seperation on fields (Works
+                the same as updateRefreshableComponentCallback)</para>
+            <para><emphasis role="bold">Changes and removal of some methods in
+                    DictionaryValidationService (KRAD version) and ViewValidationService as a result
+                    of State based validation</emphasis></para>
+            <para>Please see these classes for the changes made here.  Some method signatures were
+                changed for this support and some methods were removed for clarity.</para>
+            <para><emphasis role="bold">KULRICE-7485 - Refactoring of Session Form
+                    Handling</emphasis></para>
+            <para>Previously to clear (or reset) form properties between requests the postBind form
+                method could be implemented. This method has been removed in M2. Now to indicate a
+                property should not be persisted in session (thus reset for each request) the
+                annotation @SessionTransient should be added before the property declaration.</para>
+            <para><emphasis role="bold">KULRICE-7527 - Removal of some default nested
+                    beans</emphasis></para>
+            <para>To help with performance, some nested beans that were being initialized in the XML
+                were pulled out. In the code, if determined the component is needed, a call is made
+                to then initialize the bean.</para>
+            <para>This means for these removed beans, if you were using the nested notation to set a
+                property (for example, 'nested.property'), this will now throw an exception. You
+                must first initialize the nested bean, then set the property. Note in cases where
+                the default initialization was removed, a top level bean was created making it easy
+                to initialize if needed.</para>
+            <para>The following nested beans were removed:</para>
+            <itemizedlist>
+                <listitem>
+                    <para>Uif-InputField - constraintMessage, instructionalMessage, and suggest
+                        property</para>
+                </listitem>
+                <listitem>
+                    <para>Uif-Image - captionHeader and cutlineMessage property</para>
+                </listitem>
+                <listitem>
+                    <para>Uif-Header* - upperGroup, rightGroup, and lowerGroup properties </para>
+                </listitem>
+                <listitem>
+                    <para>All containers (Uif-Group, sections, subsections) - instructionalMessage
+                        property</para>
+                </listitem>
+            </itemizedlist>
+            <para>Example Conversion</para>
+            <programlisting>&lt;bean parent="Uif-VerticalBoxSection"> 
+    &lt;property name="header.upperGroup.items">   
+        &lt;list>    ...   &lt;/list> 
+    &lt;/property>
+&lt;/bean> </programlisting>
+            <para>change to</para>
+            <programlisting>&lt;bean parent="Uif-VerticalBoxSection">
+    &lt;property name="header.upperGroup">
+        &lt;bean parent="Uif-HeaderUpperGroup">
+            &lt;property name="items">
+                &lt;list>          ...       &lt;/list>     
+            &lt;/property>   
+        &lt;/bean> 
+    &lt;/property>
+&lt;/bean></programlisting>
+            <para><emphasis role="bold">KULRICE-7351 - JSP Templates converted to
+                    FreeMarker</emphasis></para>
+            <para>For performance reasons the KRAD JSP templates were converted to use the
+                FreeMarker templating language. Any custom components (or template overrides) that
+                were created will need to be converted to FreeMarker.</para>
+            <para>See this page for a comparison of JSP and FreeMarker: <link
+                    xlink:href="https://wiki.kuali.org/display/KULRICE/Freemarker+and+JSP+comparison"
+                    >https://wiki.kuali.org/display/KULRICE/Freemarker+and+JSP+comparison</link></para>
+            <para>Templates are associated with a component (bean) using two properties now. The
+                first is the template property which gives the location of the template source. The
+                second is the templateName property which is the name of the template to invoke (in
+                FreeMarker this is the macro name). If you override one of the default templates,
+                make sure to also give the template a unique templateName.</para>
+            <para><emphasis role="bold">KULRICE-7246 - Default escapeHtmlInPropertyValue to
+                    True</emphasis></para>
+            <para>For security reasons the escapeHtmlInPropertyValue property on DataField was
+                defaulted to true. Therefore if you have a property which has HTML that should be
+                rendered, you will need to set this property to false on the data field.</para>
+            </section>
+            <section>
+                <title>Preloading of View Objects</title>
+                    <para>Loading the view object from bean definitions can take up to 4 or 5
+                        seconds in some cases (although this is improving with the removal of
+                        default nested beans). To boast performance, an enhancement was put in to
+                        'pre-load' the view objects. This means when the application starts up, it
+                        will fetch one or more view objects for a particular view and hold until a
+                        request is made. The number of views to preload is configured by the view
+                        property preloadPoolSize. This is set to 1 by default for all views except
+                        lookups and inquiries.</para>
+                    <para>Setting Preload Pool Size</para>
+                    <programlisting>&lt;bean id="CourseView" parent="Uif-FormView"> 
+    ... 
+    &lt;property name="preloadPoolSize" value="3"/>
+&lt;/bean></programlisting>
+                    <para>The views are loaded in a separate thread so the startup time is not
+                        impacted. Whenever a request for a view is made, a view from the pool is
+                        returned and a new view object is pulled in a separate thread to replace it.
+                        If no view objects exist in the pool at the time of a request, a call is
+                        made to build the view object. For high load views you can experiment with
+                        increasing the pool size so that a view is always available (Note a log
+                        statement is made when a view is not available from the pool, thus this can
+                        be used to help tune the parameter).</para>
+                    <para>Note though storing the preloaded view objects consumes memory. In Rice
+                        (with Sampleapp) the storage was 91mb (and Rice does not have many views
+                        compared to what other applications like the KFS would). </para>
+                </section>
+           
+                <section>
+                    <title>Limiting Form Storage Size</title>
+                    <para>In previous versions of Rice a user can keep requested view objects whose
+                        forms get added to the user session (note this is only for views that have
+                        session persistence enabled). Although there are clear points implemented,
+                        they do not catch many exit actions. Therefore more and more memory
+                        continues to be consumed, even though the user might be long done with the
+                        form. </para>
+                    <para>To prevent this problem a configuration parameter was introduced that
+                        limits the number of forms per user session. The parameter name
+                        is maxNumberOfSessionForms and is set to 5 by default. This parameter can be
+                        tuned as needed however it is not recommended to go lower than 5 (think of
+                        nested lookups that might take place from a view).</para>
+                    <para>Setting Max Form Storage Size in your rice config XML:</para>
+                    <programlisting>&lt;param name="maxNumberOfSessionForms">10&lt;/param></programlisting>
+                    <para>Whenever the number of session forms is greater than the configured
+                        maximum allowed, a form will be removed from the session. For determining
+                        which form to remove in these situations, the forms are arranged according
+                        to when they were accessed. In other words, the form whose last requested
+                        action time is oldest will be removed (most recently accessed forms will be
+                        kept). </para>
+                </section>           
+            <section>
+                <title>Database Updates</title>
+                <para>Instructions on how to run the scripts to apply these database changes are in the Upgrade Guide in this document</para>
+                <section>
+                    <title>Assignment of "Add Message to Route Log" permission to the KR-SYS
+                    technical administrator returned to bootstrap dataset</title>
+                    <para>The "Add Message to Route Log" permission assignment to the KR-SYS "Technical
+                    Administrator" role was present in the main 1.0.3.3 dataset but missing in the
+                    bootstrap dataset for 2.0.0. The sql script removes the permission from the role to
+                    make upgraded databases consistent with new ones.</para>
+                </section>
+                <section>
+                    <title>DB updates for external messages</title>
+                    <para>A new message table and locale system parameter was added to support external
+                        messages.</para>
+                </section>
+                <section>
+                    <title>KIM role and guest user to support guest access</title>
+                    <para>To support guest access a new KIM user with id 'guest' was created along with
+                        a guest role.</para>
+                </section>
+                <section>
+                    <title>Apply SQL for new KRMS tables </title>
+                    <para>New tables and sequences were added to the KRMS schema to support Type-Type
+                        Relations, Natural Language Translation, Reference Object Bindings features
+                        (<link
+                            xlink:href="https://wiki.kuali.org/display/KULRICE/Rice+2.x+-+KRMS+for+KS+Analysis"
+                            >Rice 2.x - KRMS for KS Analysis</link>).</para>
+                </section>
+            </section>
+            <section>
+                    <title>Cleanup of Ajax Actions</title>
+                    <para>AjaxAction and its bean Uif-AjaxActionButton was removed. All bean references
+                        should change to use 'Uif-PrimaryActionButton' (ajax is the default now). The
+                        bean update script can be run to apply this change.</para>
+                    <para>Property validatedLineActions on CollectionGroup was removed. Now actions that
+                        are defined in lineActions can have the property 'performClientSideValidation'
+                        flag set to true to indicate the line should be validated.</para>
+            </section>
+            <section>
+                    <title>Resolving ambiguous method call in MessageMap.addGrowlMessage()</title>
+                    <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>Removed MessageMap#public void addGrowlMessage(String growlTitle, String
+                            messageKey) </para>
+                    </listitem>
+                    <listitem>
+                        <para>Removed MessageMap#public void addGrowlMessage(String growlTitle, String
+                            growlTheme, String messageKey) </para>
+                    </listitem>
+                    <listitem>
+                        <para>Removed MessageMap#public void addGrowlMessage(String growlTitle, String
+                            growlTheme, String messageKey, String... messageParameters)</para>
+                    </listitem>
+                    <listitem>
+                        <para>Use MessageMap#addGrowl(GrowlMessage growl)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            </section>
+            <section>
+                    <title>Central Message Repository</title>
+                    <para>Property labelKey of BaseConstraint (and therefore all constraints) was
+                        renamed to messageKey. The bean update script can be run to apply this
+                        change.</para>
+                    <para>Property baselinePackages of DataDictionaryService was renamed
+                        to additionalDictionaryFiles. In addition changed from a List&lt;String&gt; to
+                        Map&lt;String, List&lt;String&gt;&gt; where the map key is the namespace the
+                        dictionary beans should be associated with.</para>
+            </section>
+            <section>
+                <title>Transactional Document Support</title>
+                    <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>Renamed MaintenanceForm to MaintenanceDocumentForm</para>
+                    </listitem>
+                    <listitem>
+                        <para>Renamed MaintenanceView to MaintenanceDocumentView</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            </section>
+    </section>
+</article>
