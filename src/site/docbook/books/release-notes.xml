@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright 2005-2013 The Kuali Foundation
+
+    Licensed under the Educational Community License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+    http://www.opensource.org/licenses/ecl2.php
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<article xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <info>
+        <title>Kuali Rice ${project.version} Release Notes</title>
+        <edition>${project.version}</edition>
+        <pubdate>Released: ${docbook.build.timestamp}</pubdate>
+    </info>
+    <section xml:id="overview" xreflabel="Overview">
+        <title>Overview</title>
+        <para>Welcome to Rice ${project.version}! </para>
+        <section>
+            <title>Release Highlights</title>
+            <para>This version of Rice is a patch release consisting of bug fixes and small items
+        needed by Kuali application partners. There are no database changes and it should be a
+        drop-in replacement.</para>
+        </section>
+        <section>
+            <title>Download</title>
+            <para>Kuali Rice ${project.version} can be downloaded from the Rice website at <link xlink:show="new" xlink:href="http://kuali.org/rice/download">http://kuali.org/rice/download</link>.</para>
+            <para>There are three different distributions of Rice available: source, binary and
+                server. Please read the <link xlink:href="http://site.kuali.org/rice/${project.version}/reference/html/IG.html">Installation Guide</link> for
+                more details on each of these distributions.</para>
+            <para>Applications can also consume Rice from the maven site at <link
+                    xlink:href="http://search.maven.org/#search|ga|1|org.kuali.rice"
+                    >http://search.maven.org/#search|ga|1|org.kuali.rice</link>.</para>
+        </section>
+        <section>
+            <title>Documentation</title>
+            <para>API Documentation can be found at <link xlink:show="new" xlink:href="http://site.kuali.org/rice/${project.version}/apidocs/index.html">http://site.kuali.org/rice/${project.version}/apidocs/index.html</link></para>
+            <para>Formal documentation can be found at <link xlink:show="new"
+                    xlink:href="http://site.kuali.org/rice/${project.version}/reference/html/index.html"
+                    >http://site.kuali.org/rice/${project.version}/reference/html/index.html</link>.
+                This documentation is still in the process of review and update  which will continue
+                through subsequent releases, so please follow the notes in each document to report
+                any outdated information.</para>
+        </section>
+        <section>
+            <title>Contact</title>
+            <para>If you encounter any difficulty, please don't hesitate to contact the Rice team on
+                our public collaboration mailing list at <email>rice.collab@kuali.org</email>.
+                Please indicate that you are using the ${project.version} version of Rice.</para>
+        </section>
+    </section>
+    <section xml:id="items_addressed_in_rice">
+        <title>Items Addressed in Rice ${project.version}</title>
+      
+      <section>
+        <title>Bug Fix</title>
+        <para>
+          <itemizedlist>
+            <listitem>
+              <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9846'>KULRICE-9846</link>] - defaultValue not applied before disabled expression evaluation on initialization</para>
+            </listitem>
+            <listitem>
+              <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-10567'>KULRICE-10567</link>] - readOnlyListDisplayType on DataField does not work, Html is escaped</para>
+            </listitem>
+            <listitem>
+              <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-10604'>KULRICE-10604</link>] - Light table examples not rendering freemarker exception in logs</para>
+            </listitem>
+            <listitem>
+              <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-10729'>KULRICE-10729</link>] - Function call in krad.validate.js is using wrong method signature</para>
+            </listitem>
+            <listitem>
+              <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-10819'>KULRICE-10819</link>] - Adding new stop results in NPE on PF Screen</para>
+            </listitem>
+          </itemizedlist>
+        </para>
+      </section>
+      
+      
+      <section>
+        <title>Epic</title>
+        <para>
+          <itemizedlist>
+            <listitem>
+              <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-9963'>KULRICE-9963</link>] - Enhance KRMS to support "contains" operator for collections</para>
+            </listitem>
+            <listitem>
+              <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-10142'>KULRICE-10142</link>] - KS KRMS service changes</para>
+            </listitem>
+          </itemizedlist>
+        </para>
+      </section>
+      
+      
+      <section>
+        <title>Task</title>
+        <para>
+          <itemizedlist>
+            <listitem>
+              <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-10146'>KULRICE-10146</link>] - add RuleManagementService tests for NaturalLanguageUsage, NaturalLanguageTemplate related methods</para>
+            </listitem>
+            <listitem>
+              <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-10147'>KULRICE-10147</link>] - add caching to RuleManagementService methods related to Agenda, Rule, Action, Proposition</para>
+            </listitem>
+            <listitem>
+              <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-10148'>KULRICE-10148</link>] - KRMS support for "contains" operator</para>
+            </listitem>
+            <listitem>
+              <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-10167'>KULRICE-10167</link>] - add caching to RuleManagementService methods related to Context, ReferenceObjectBinding, NaturalLanguage</para>
+            </listitem>
+            <listitem>
+              <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-10613'>KULRICE-10613</link>] - Merge remaining changes from the ks-krms branch in rice-2.3</para>
+            </listitem>
+            <listitem>
+              <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-10658'>KULRICE-10658</link>] - GroupService assignPrincipalToGroup addition needs to evict role cache too</para>
+            </listitem>
+            <listitem>
+              <para>[<link xlink:href='https://jira.kuali.org/browse/KULRICE-10688'>KULRICE-10688</link>] - Binding path is lost after refresh of parent collection for child ajax retrieved components</para>
+            </listitem>
+          </itemizedlist>
+        </para>
+      </section>
+      
+      
+    </section>
+</article>
